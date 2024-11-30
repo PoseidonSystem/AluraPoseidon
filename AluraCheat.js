@@ -1,5 +1,4 @@
-// ==UserScript==
-// @name         Alura Cheat
+ @name         Alura Cheat
 // @namespace    https://cursos.alura.com.br/
 // @version      1.0
 // @description  Painel flutuante para automatizar tarefas na Alura 
@@ -54,6 +53,8 @@
             if (next_lesson_button) {
                 next_lesson_button.click();
                 console.log("Botão 'bootcamp-next-button' clicado.");
+                // Chama runScript novamente para continuar o processo
+                setTimeout(runScript, 1000); // Chama novamente após 1 segundo
             } else {
                 alert("Botão 'bootcamp-next-button' não encontrado.");
             }
