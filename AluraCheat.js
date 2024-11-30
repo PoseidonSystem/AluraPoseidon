@@ -54,8 +54,11 @@
             if (next_lesson_button) {
                 next_lesson_button.click();
                 console.log("Botão 'bootcamp-next-button' clicado.");
-                // Chama runScript novamente para continuar o processo
-                setTimeout(runScript, 1000); // Chama novamente após 1 segundo
+                
+                // Espera um pouco para garantir que a próxima lição carregue antes de chamar runScript
+                setTimeout(() => {
+                    runScript();
+                }, 2000); // Aguarda 2 segundos após clicar para garantir que a nova página carregue
             } else {
                 alert("Botão 'bootcamp-next-button' não encontrado.");
             }
