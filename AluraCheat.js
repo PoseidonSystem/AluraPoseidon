@@ -1,4 +1,5 @@
- @name         Alura Cheat
+// ==UserScript==
+// @name         Alura Cheat
 // @namespace    https://cursos.alura.com.br/
 // @version      1.0
 // @description  Painel flutuante para automatizar tarefas na Alura 
