@@ -56,11 +56,10 @@
                 console.log("Botão 'bootcamp-next-button' clicado.");
                 
                 // Espera um pouco para garantir que a próxima lição carregue antes de chamar runScript
-                setTimeout(() => {
-                    runScript();
-                }, 2000); // Aguarda 2 segundos após clicar para garantir que a nova página carregue
+                setTimeout(runScript, 2000); // Aguarda 2 segundos após clicar para garantir que a nova página carregue
             } else {
-                alert("Botão 'bootcamp-next-button' não encontrado.");
+                console.log("Botão 'bootcamp-next-button' não encontrado. Tentando novamente...");
+                setTimeout(runScript, 2000); // Tenta novamente a cada 2 segundos
             }
         }, 2000); // 2 segundos de espera
     };
