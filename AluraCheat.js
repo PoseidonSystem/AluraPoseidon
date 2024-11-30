@@ -12,6 +12,8 @@
 (function() {
     'use strict';
 
+    let intervalId;
+
     // Função principal para executar o script
     const runScript = () => {
         let next_lesson_button = document.getElementsByClassName("bootcamp-next-button")[0];
@@ -39,29 +41,22 @@
 
         if (hasCorrectAnswer) {
             console.log("Alternativa(s) correta(s) selecionada(s).");
-        } else if (submit_button) {
-            // Clica no botão "Submeter resposta" se não houver alternativas corretas
-            submit_button.click();
-            console.log("Botão 'Submeter resposta' clicado.");
-        } else if (transcription_button) {
-            // Clica no botão "continuar lendo" se não houver alternativas e não houver botão de submeter
-            transcription_button.click();
-            console.log("Botão 'continuar lendo' clicado.");
+            if (submit_button) {
+                submit_button.click(); // Submete a resposta
+                console.log("Botão 'Submeter resposta' clicado.");
+            } else if (transcription_button) {
+                transcription_button.click(); // Clica no botão "continuar lendo"
+                console.log("Botão 'continuar lendo' clicado.");
+            }
         }
 
-        // Espera um pouco antes de clicar no próximo botão
-        setTimeout(() => {
-            if (next_lesson_button) {
-                next_lesson_button.click();
-                console.log("Botão 'bootcamp-next-button' clicado.");
-                
-                // Espera um pouco para garantir que a próxima lição carregue antes de chamar runScript
-                setTimeout(runScript, 2000); // Aguarda 2 segundos após clicar para garantir que a nova página carregue
-            } else {
-                console.log("Botão 'bootcamp-next-button' não encontrado. Tentando novamente...");
-                setTimeout(runScript, 2000); // Tenta novamente a cada 2 segundos
-            }
-        }, 2000); // 2 segundos de espera
+        // Clica no próximo botão, se encontrado
+        if (next_lesson_button) {
+            next_lesson_button.click();
+            console.log("Botão 'bootcamp-next-button' clicado.");
+        } else {
+            console.log("Botão 'bootcamp-next-button' não encontrado. Tentando novamente...");
+        }
     };
 
     // Função para criar o painel flutuante
@@ -89,7 +84,16 @@
         activateButton.style.cursor = 'pointer';
 
         // Adiciona o evento de clique para executar o script
-        activateButton.addEventListener('click', runScript);
+        activateButton.addEventListener('click', () => {
+            if (!intervalId) {
+                intervalId = setInterval(runScript, 2000); // Executa a função a cada 2 segundos
+                console.log("Cheat ativado!");
+            } else {
+                clearInterval(intervalId); // Para o cheat se já estiver ativado
+                intervalId = null;
+                console.log("Cheat desativado.");
+            }
+        });
 
         // Adiciona o botão ao painel flutuante
         cheatPanel.appendChild(activateButton);
