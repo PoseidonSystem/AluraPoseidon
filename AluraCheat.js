@@ -12,7 +12,11 @@
 (function() {
     'use strict';
 
+    let isActive = true; // Variável de controle para ativar/desativar o script
+
     const runScript = () => {
+        if (!isActive) return; // Não executa se não estiver ativo
+
         let next_lesson_button = document.getElementsByClassName("bootcamp-next-button")[0];
         let submit_button = document.getElementById('submitBlocks');
         let transcription_button = document.querySelector('.video-transcription-button');
@@ -60,6 +64,27 @@
         // Chama o script novamente após um intervalo de tempo
         setTimeout(startAutoRun, 1000); // 1 segundo de espera antes de executar novamente
     };
+
+    // Função para alternar a ativação do script
+    const toggleActive = () => {
+        isActive = !isActive;
+        console.log(`O script está agora ${isActive ? 'ativo' : 'inativo'}.`);
+    };
+
+    // Adiciona um botão na página para ativar/desativar o script
+    const button = document.createElement('button');
+    button.textContent = 'Ativar/Desativar Auto-Execução';
+    button.style.position = 'fixed';
+    button.style.top = '10px';
+    button.style.right = '10px';
+    button.style.zIndex = '1000';
+    button.style.padding = '10px';
+    button.style.backgroundColor = 'lightblue';
+    button.style.border = 'none';
+    button.style.borderRadius = '5px';
+    button.style.cursor = 'pointer';
+    button.onclick = toggleActive;
+    document.body.appendChild(button);
 
     // Espera um pouco para garantir que o conteúdo esteja carregado
     setTimeout(startAutoRun, 1000); // 1 segundo de espera antes de iniciar a execução automática
