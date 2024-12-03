@@ -58,7 +58,7 @@
     const startAutoRun = () => {
         runScript();
         // Chama o script novamente após um intervalo de tempo
-        setTimeout(startAutoRun, 5000); // 5 segundos de espera antes de executar novamente
+        setTimeout(startAutoRun, 1000); // 1 segundo de espera antes de executar novamente
     };
 
     // Espera um pouco para garantir que o conteúdo esteja carregado
